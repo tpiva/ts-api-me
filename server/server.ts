@@ -1,12 +1,10 @@
 import * as http from 'http';
 import Api from './api/api';
-import { errorHandlerApi } from './api/errorHandlerApi';
 
 const config = require('./config/env/config')();
 const server = http.createServer(Api);
 
-Api.use(errorHandlerApi);
 
-server.listen(config.serverPort, () => {
-    console.log('Server started at port: 330');
-})
+server.listen(config.serverPort);
+server.on('listening', () => console.log(`Server is running at port ${config.serverPort}`));
+server.on('error', (error: NodeJS.ErrnoException) => console.log(`Occured an error ${error}`));
