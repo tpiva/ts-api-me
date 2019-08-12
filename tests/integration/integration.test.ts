@@ -1,6 +1,27 @@
 import { app, request, expect } from './config/helpers';
 
 describe('Integration tests', ()=> {
+    describe('GET /', () => {
+        it('Deve retornar hello', done => {
+            request(app).get('/').end((error, res) => {
+                expect(res.status).to.equal(200);
+                expect(res.text).to.be.eql('hello');
+                done(error);
+            });
+        });
+    });
+
+    describe('GET /ola/:nome', () => {
+        it('Deve retornar hello, test', done => {
+            const nome = 'test';
+            request(app).get(`/ola/${nome}`).end((error, res) => {
+                expect(res.status).to.equal(200);
+                expect(res.text).to.be.eql('Hello, test');
+                done(error);
+            });
+        });
+    });
+
     describe('GET /api/users/all', () => {
         it('Deve retornar um Json com todos os usuários', done => {
             request(app).get('/api/users/all').end((_error, res) => {
