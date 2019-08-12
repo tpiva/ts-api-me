@@ -3,10 +3,10 @@
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
-const basename = path.basename(__filename);
-const config = require(__dirname + '/../config/env/config.json');
+const basename = path.basename(module.filename);
+const config = require('../config/env/config.js')();
 const env = config.env || 'development';
-const db = {};
+const db = <any>{};
 
 let sequelize;
 if (config.dbURL) {
