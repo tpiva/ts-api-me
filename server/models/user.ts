@@ -26,6 +26,8 @@ export default (sequelize, DataTypes) => {
                 notEmpty: false,
             }
         }
+    }, {
+        freezeTableName: true,
     });
 
     return User;
