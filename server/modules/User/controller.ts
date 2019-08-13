@@ -1,9 +1,7 @@
 import { Request, Response } from 'express';
 
 class UserController {
-    constructor() {
-        
-    }
+    constructor() {}
 
     getAll(req: Request, res: Response) {
         res.status(200).json({
