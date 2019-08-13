@@ -5,7 +5,7 @@ export interface IUser {
     password: string;
 }
 
-export interface IUserDetails extends IUser {
+export interface IUserDetail extends IUser {
     id: number;
     name: string;
     email: string;
@@ -22,13 +22,13 @@ export function createUsers(data: any[]): IUser[] {
     return data.map(createUser);
 }
 
-export function createUserById({id, name, email, password}: any): IUserDetails {
+export function createUserById({id, name, email, password}: any): IUserDetail {
     return {
         id, name, email, password
     };
 }
 
-export function createUserByEmail({id, name, email, password}: any): IUserDetails {
+export function createUserByEmail({id, name, email, password}: any): IUserDetail {
     return {
         id, name, email, password
     };
