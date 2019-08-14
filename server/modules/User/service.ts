@@ -19,7 +19,7 @@ class User implements IUser {
         return model.User.findAll({
             order: ['name']
         })
-            .then(createUser);
+            .then(createUsers);
     }
 
     getById(id: number): BlueBird<IUserDetail> {
@@ -44,7 +44,7 @@ class User implements IUser {
     }
 
     delete(id: number) {
-        return model.User.detroy({
+        return model.User.destroy({
             where: { id }
         });
     }
