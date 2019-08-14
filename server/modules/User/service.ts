@@ -9,20 +9,45 @@ class User implements IUser {
     public email: string;
     public password: string;
 
-    constructor(){}
+    constructor() { }
 
-    create(user: any){
+    create(user: any) {
         return model.User.create(user);
     }
 
-    getAll(): BlueBird<IUser[]>{
+    getAll(): BlueBird<IUser[]> {
         return model.User.findAll({
             order: ['name']
         })
-        .then(createUser);
+            .then(createUser);
     }
 
-    getById(id: number): BlueBird<IUserDetail>{}
-    getByEmail(email: string): BlueBird<IUserDetail>{}
-    update(id: number, user: any){}
+    getById(id: number): BlueBird<IUserDetail> {
+        return model.User.findOne({
+            where: { id }
+        })
+            .then(createUserById);
+    }
+
+    getByEmail(email: string): BlueBird<IUserDetail> {
+        return model.User.findOne({
+            where: { email }
+        })
+            .then(createUserByEmail);
+    }
+
+    update(id: number, user: any) {
+        return model.User.update(user, {
+            where: {id},
+            fields: ['name','email','password']
+        });
+    }
+
+    delete(id: number) {
+        return model.User.detroy({
+            where: { id }
+        });
+    }
 }
+
+export default User;
