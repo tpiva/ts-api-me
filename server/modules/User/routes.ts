@@ -17,7 +17,7 @@ class UserRoutes{
     }
 
     findOne(req: Request, res: Response) {
-        return UserCtrl.getById(req, res);        
+        return UserCtrl.getById(req, res);
     }
     update(req: Request, res: Response) {
         return UserCtrl.updateUser(req, res);

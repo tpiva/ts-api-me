@@ -50,7 +50,7 @@ describe('Integration tests', ()=> {
             request(app).get(`/api/users/${userDefault.id}`).end((error, res) => {
                 expect(res.status).to.equal(HttpStatus.OK);
                 expect(res.body.payload.id).to.be.eql(userDefault.id);
-                expect(res.body.payload.id).to.have.all.keys([
+                expect(res.body.payload).to.have.all.keys([
                     'id', 'name', 'email', 'password'
                 ])
                 id = res.body.payload.id;
@@ -85,21 +85,19 @@ describe('Integration tests', ()=> {
             };
             request(app).put(`/api/users/${userTest.id}/update`).send(user).end((error, res) => {
                 expect(res.status).to.equal(HttpStatus.OK);
-                expect(res.body.payload.id).to.be.equal(userTest.id);
-                expect(res.body.payload.name).to.be.equal(user.name);
-                expect(res.body.payload.email).to.be.equal(user.email);
+                expect(res.body.payload[0]).to.eql(1);
                 done(error);
             });
         });
     });
 
-    describe('DELETE /api/users/:id/destroy', () => {
-        it('Deve deletar um usuário', done =>{
-            request(app).delete(`/api/users/${userTest.id}/destroy`).end((error, res) => {
-                expect(res.status).to.equal(HttpStatus.OK);
-                expect(res.body.payload).to.eql(1);
-                done(error);
-            });
-        });
-    });
+    // describe('DELETE /api/users/:id/destroy', () => {
+    //     it('Deve deletar um usuário', done =>{
+    //         request(app).delete(`/api/users/${userTest.id}/destroy`).end((error, res) => {
+    //             expect(res.status).to.equal(HttpStatus.OK);
+    //             expect(res.body.payload).to.eql(1);
+    //             done(error);
+    //         });
+    //     });
+    // });
 });
