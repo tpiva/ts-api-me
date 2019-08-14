@@ -7,6 +7,7 @@ import { errorHandlerApi } from './errorHandlerApi';
 
 class Api {
     public express: Application;
+    public auth;
 
     constructor() {
         this.express = express();
@@ -18,11 +19,11 @@ class Api {
         this.express.use(bodyParser.urlencoded( {extended: true} ));
         this.express.use(bodyParser.json());
         this.express.use(errorHandlerApi);
-        this.router(this.express);
+        this.router(this.express, this.auth);
     }
 
-    private router(app: Application): void {
-        new Routes(app);
+    private router(app: Application, auth: any): void {
+        new Routes(app, auth);
     }
 }
 
