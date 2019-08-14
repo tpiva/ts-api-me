@@ -12,16 +12,16 @@ describe('Unit Test controller', () => {
             };
             const user = new User();
             return user.create(novoUsuario)
-            .then((result) => {
-                expect(result.dataValues).to.have.all.keys(
-                    ['email', 'id', 'name', 'password', 'updatedAt', 'createdAt']
-                )
-            });
+                .then((result) => {
+                    expect(result.dataValues).to.have.all.keys(
+                        ['email', 'id', 'name', 'password', 'updatedAt', 'createdAt']
+                    )
+                });
         });
     });
 
-    describe('Mehtod update', () => {
-        it('Deve atualizar um usuário', ()=> {
+    describe('Method update', () => {
+        it('Deve atualizar um usuário', () => {
             const usuarioAtualizado = {
                 name: 'Nome atualizado',
                 email: 'emailatualizado@email.com',
@@ -34,7 +34,7 @@ describe('Unit Test controller', () => {
     });
 
     describe('Mehtod getUsers', () => {
-        it('Deve retornar uma lista de usuários', ()=> {
+        it('Deve retornar uma lista de usuários', () => {
             const user = new User();
             return user.getAll().then(data => {
                 expect(data).to.be.an('array');
@@ -45,8 +45,32 @@ describe('Unit Test controller', () => {
         });
     });
 
+    describe('Method getByEmail', () => {
+        it('Deve retornar um usuário pelo email', () => {
+            const user = new User();
+            return user.getByEmail('emailatualizado@email.com').then(data => {
+                expect(data).to.be.an('object');
+                expect(data).to.have.all.keys(
+                    ['email', 'id', 'name', 'password']
+                );
+            });
+        });
+    });
+
+    describe('Method getById', () => {
+        it('Deve retornar um usuário pelo id', () => {
+            const user = new User();
+            return user.getById(23).then(data => {
+                expect(data).to.be.an('object');
+                expect(data).to.have.all.keys(
+                    ['email', 'id', 'name', 'password']
+                );
+            });
+        });
+    });
+
     describe('Mehtod delete', () => {
-        it('Deve deletar um usuário', ()=> {
+        it('Deve deletar um usuário', () => {
             const user = new User();
             return user.delete(23).then(data => {
                 expect(data).to.be.equal(1);
