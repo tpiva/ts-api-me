@@ -6,21 +6,18 @@ import { dbErrorHandler } from '../../config/dbErrorHandler';
 import User from './service';
 
 class UserController {
-    private UserService: User;
 
-    constructor() {
-        this.UserService = new User();
-    }
+    constructor() {}
 
     getAll(req: Request, res: Response) {
-        this.UserService
+        User
             .getAll()
             .then(lodash.partial(onSuccess, res))
             .catch(lodash.partial(onError, res, `Error ao buscar todos os usuários`));
     }
 
     createUser(req: Request, res: Response) {
-        this.UserService
+        User
             .create(req.body)
             .then(lodash.partial(onSuccess, res))
             .catch(lodash.partial(dbErrorHandler, res))
@@ -29,7 +26,7 @@ class UserController {
 
     getById(req: Request, res: Response) {
         const userId = parseInt(req.params.id);
-        this.UserService
+        User
             .getById(userId)
             .then(lodash.partial(onSuccess, res))
             .catch(lodash.partial(onError, res, `Error ao buscar um usuário`));
@@ -38,7 +35,7 @@ class UserController {
     updateUser(req: Request, res: Response) {
         const userId = parseInt(req.params.id);
         const props = req.body;
-        this.UserService
+        User
             .update(userId, props)
             .then(lodash.partial(onSuccess, res))
             .catch(lodash.partial(onError, res, `Error ao atualizar um usuário`));
@@ -46,7 +43,7 @@ class UserController {
 
     deleteUser(req: Request, res: Response) {
         const userId = parseInt(req.params.id);
-        this.UserService
+        User
             .delete(userId)
             .then(lodash.partial(onSuccess, res))
             .catch(lodash.partial(onError, res, `Error ao deletar um usuário`));
