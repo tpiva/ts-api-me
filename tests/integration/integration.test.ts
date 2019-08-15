@@ -39,6 +39,38 @@ describe('Integration tests', ()=> {
         });
     });
 
+    describe('POST /token', () => {
+        it('Deve receber um JWT', done => {
+            const credentials = {
+                email: userDefault.email,
+                password: userDefault.password,
+            };
+            request(app)
+            .post('/token')
+            .send(credentials)
+            .end((error, res) => {
+                expect(res.status).to.equal(HttpStatus.OK);
+                expect(res.body.token).to.equal(`${token}`);
+                done(error);
+            });
+        });
+
+        it('Não deve gerar token', done => {
+            const credentials = {
+                email: 'teste@email.com',
+                password: 'invalid',
+            };
+            request(app)
+            .post('/token')
+            .send(credentials)
+            .end((error, res) => {
+                expect(res.status).to.equal(HttpStatus.UNAUTHORIZED);
+                expect(res.body).to.empty;
+                done(error);
+            });
+        })
+    });
+
     describe('GET /api/users/all', () => {
         it('Deve retornar um array com todos os usuários', done => {
             request(app).get('/api/users/all').end((error, res) => {
@@ -97,13 +129,13 @@ describe('Integration tests', ()=> {
         });
     });
 
-    // describe('DELETE /api/users/:id/destroy', () => {
-    //     it('Deve deletar um usuário', done =>{
-    //         request(app).delete(`/api/users/${userTest.id}/destroy`).end((error, res) => {
-    //             expect(res.status).to.equal(HttpStatus.OK);
-    //             expect(res.body.payload).to.eql(1);
-    //             done(error);
-    //         });
-    //     });
-    // });
+    describe('DELETE /api/users/:id/destroy', () => {
+        it('Deve deletar um usuário', done =>{
+            request(app).delete(`/api/users/${userTest.id}/destroy`).end((error, res) => {
+                expect(res.status).to.equal(HttpStatus.OK);
+                expect(res.body.payload).to.eql(1);
+                done(error);
+            });
+        });
+    });
 });
