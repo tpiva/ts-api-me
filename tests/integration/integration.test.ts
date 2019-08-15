@@ -73,7 +73,11 @@ describe('Integration tests', ()=> {
 
     describe('GET /api/users/all', () => {
         it('Deve retornar um array com todos os usuários', done => {
-            request(app).get('/api/users/all').end((error, res) => {
+            request(app)
+            .get('/api/users/all')
+            .set('Content-Type', 'application/json')
+            .set('Authorization', `JWT ${token}`)
+            .end((error, res) => {
                 expect(res.status).to.equal(HttpStatus.OK);
                 expect(res.body.payload).to.be.an('array');
                 expect(res.body.payload[0].name).to.be.equal(userDefault.name);
@@ -85,7 +89,11 @@ describe('Integration tests', ()=> {
 
     describe('GET /api/users/:id', () => {
         it('Deve retornar um Json com apenas um usuário', done =>{
-            request(app).get(`/api/users/${userDefault.id}`).end((error, res) => {
+            request(app)
+            .get(`/api/users/${userDefault.id}`)
+            .set('Content-Type', 'application/json')
+            .set('Authorization', `JWT ${token}`)
+            .end((error, res) => {
                 expect(res.status).to.equal(HttpStatus.OK);
                 expect(res.body.payload.id).to.be.eql(userDefault.id);
                 expect(res.body.payload).to.have.all.keys([
@@ -105,7 +113,12 @@ describe('Integration tests', ()=> {
                 email: 'testepost@email.com',
                 password: 'newuser'
             };
-            request(app).post('/api/users/create').send(user).end((error, res) => {
+            request(app)
+            .post('/api/users/create')
+            .set('Content-Type', 'application/json')
+            .set('Authorization', `JWT ${token}`)
+            .send(user)
+            .end((error, res) => {
                 expect(res.status).to.equal(HttpStatus.OK);
                 expect(res.body.payload.id).to.be.equal(user.id);
                 expect(res.body.payload.name).to.be.equal(user.name);
@@ -121,7 +134,12 @@ describe('Integration tests', ()=> {
                 name: 'TesteUpdate',
                 email: 'update@email.com'
             };
-            request(app).put(`/api/users/${userTest.id}/update`).send(user).end((error, res) => {
+            request(app)
+            .put(`/api/users/${userTest.id}/update`)
+            .set('Content-Type', 'application/json')
+            .set('Authorization', `JWT ${token}`)
+            .send(user)
+            .end((error, res) => {
                 expect(res.status).to.equal(HttpStatus.OK);
                 expect(res.body.payload[0]).to.eql(1);
                 done(error);
@@ -131,7 +149,11 @@ describe('Integration tests', ()=> {
 
     describe('DELETE /api/users/:id/destroy', () => {
         it('Deve deletar um usuário', done =>{
-            request(app).delete(`/api/users/${userTest.id}/destroy`).end((error, res) => {
+            request(app)
+            .delete(`/api/users/${userTest.id}/destroy`)
+            .set('Content-Type', 'application/json')
+            .set('Authorization', `JWT ${token}`)
+            .end((error, res) => {
                 expect(res.status).to.equal(HttpStatus.OK);
                 expect(res.body.payload).to.eql(1);
                 done(error);
