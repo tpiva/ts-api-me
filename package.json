@@ -12,7 +12,7 @@
     "integration-coverage": "nyc --reporter=html npm run integration-test",
     "unit-coverage": "nyc --reporter=html npm run unit-test"
   },
-  "author": "",
+  "author": "Thiago Piva Magalhaes",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^3.0.6",
