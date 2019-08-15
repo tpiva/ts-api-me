@@ -1,3 +1,5 @@
+import * as bscrypt from 'bcrypt';
+
 export default (sequelize, DataTypes) => {
     const User = sequelize.define('User', {
         id: {
@@ -29,6 +31,20 @@ export default (sequelize, DataTypes) => {
     }, {
         freezeTableName: true,
     });
+
+    User.beforeCreate((user) => {
+        return hashPassword(user);
+    });
+
+    User.beforeUpdate((user) => {
+        return hashPassword(user);
+    });
+    
+
+    function hashPassword(user: any) {
+        const salt = bscrypt.genSaltSync(10);
+        user.set('password', bscrypt.hashSync(user.password, salt));
+    }
 
     return User;
 }
