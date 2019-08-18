@@ -1,7 +1,28 @@
-import { testDouble, expect } from './config/helpers';
+import { expect } from './config/helpers';
 import User from '../../server/modules/User/service';
+const model = require('../../server/models');
 
 describe('Unit Test controller', () => {
+
+    const defaultUser = {
+        id: 1,
+        name: 'Default User',
+        email: 'default@email.com',
+        password: '1234',
+    };
+
+    beforeEach((done) => {
+        model.User.destroy({
+            where: {}
+        })
+        .then(() => {
+            model.User.create(defaultUser).then(() => {
+                console.log('Default user created');
+                done();
+            });
+        });
+    });
+
     describe('Method create', () => {
         it('Deve criar um novo usuário', () => {
             const novoUsuario = {
@@ -25,7 +46,7 @@ describe('Unit Test controller', () => {
                 name: 'Nome atualizado',
                 email: 'emailatualizado@email.com',
             };
-            return User.update(23, usuarioAtualizado).then(data => {
+            return User.update(defaultUser.id, usuarioAtualizado).then(data => {
                 expect(data[0]).to.be.equal(1);
             });
         });
@@ -35,16 +56,13 @@ describe('Unit Test controller', () => {
         it('Deve retornar uma lista de usuários', () => {
             return User.getAll().then(data => {
                 expect(data).to.be.an('array');
-                expect(data[0]).to.have.all.keys(
-                    ['email', 'id', 'name', 'password']
-                );
             });
         });
     });
 
     describe('Method getByEmail', () => {
         it('Deve retornar um usuário pelo email', () => {
-            return User.getByEmail('emailatualizado@email.com').then(data => {
+            return User.getByEmail(defaultUser.email).then(data => {
                 expect(data).to.be.an('object');
                 expect(data).to.have.all.keys(
                     ['email', 'id', 'name', 'password']
@@ -55,7 +73,7 @@ describe('Unit Test controller', () => {
 
     describe('Method getById', () => {
         it('Deve retornar um usuário pelo id', () => {
-            return User.getById(23).then(data => {
+            return User.getById(defaultUser.id).then(data => {
                 expect(data).to.be.an('object');
                 expect(data).to.have.all.keys(
                     ['email', 'id', 'name', 'password']
@@ -66,7 +84,7 @@ describe('Unit Test controller', () => {
 
     describe('Mehtod delete', () => {
         it('Deve deletar um usuário', () => {
-            return User.delete(23).then(data => {
+            return User.delete(defaultUser.id).then(data => {
                 expect(data).to.be.equal(1);
             });
         });
