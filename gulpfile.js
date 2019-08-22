@@ -4,12 +4,21 @@ const ts = require('gulp-typescript');
 
 const tsProject = ts.createProject('tsconfig.json');
 
+gulp.task('compile', () => {
+    return tsProject.src()
+        .pipe(tsProject())
+        .js.pipe(gulp.dest('dist'));
+});
+
 gulp.task('clean', () => {
-    return gulp.src('dist').pipe(clean());
+    return gulp.src('dist')
+        .pipe(clean());
 });
 
-gulp.task('compile', gulp.series(['clean']), () => {
-    return tsProject.src().pipe(tsProject()).js.pipe(gulp.dest('dist'));
+gulp.task('copy-opts', gulp.series(['clean', 'compile']), () => {
+    return gulp.src('tests/unit/config/mocha.opts')
+        .pipe(gulp.dest('dist/tests/unit/config'))
+        .pipe(gulp.dest('dist/tests/integration/config'));
 });
 
-gulp.task('default', gulp.series(['compile']));
+gulp.task('default', gulp.series(['copy-opts']));
