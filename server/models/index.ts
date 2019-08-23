@@ -9,7 +9,7 @@ const env = config.env || 'development';
 const db = <any>{};
 
 let sequelize;
-config.operatorsAliases = Sequelize.Op;
+config.operatorsAliases = true;
 if (config.dbURL) {
   sequelize = new Sequelize(config.dbURL);
 } else {
