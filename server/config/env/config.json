@@ -1,0 +1,9 @@
+{
+    "test": {
+        "username": "postgres",
+        "password": "postgres",
+        "database": "ts_api_test",
+        "host": "localhost",
+        "dialect": "postgres"
+    }
+}
