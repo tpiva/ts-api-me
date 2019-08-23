@@ -8,6 +8,5 @@ module.exports = {
     serverPort: 3000,
     pgPort: 5432,
     dbURL: 'postgres://postgres:postgres@localhost:5432/ts-api-test',
-    secret: 'S3cr3t',
-    operatorsAliases: require("sequelize").Op
+    secret: 'S3cr3t'
 }
