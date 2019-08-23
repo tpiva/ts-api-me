@@ -13,7 +13,7 @@ if (config.dbURL) {
   sequelize = new Sequelize(config.dbURL);
 } else {
   sequelize = new Sequelize(config.db, config.username, config.password, { 
-    operatorsAliases: false 
+    operatorsAliases: {} 
 });
 }
 
