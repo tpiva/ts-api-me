@@ -11,7 +11,7 @@ env:
     - NODE_ENV: test
     - TRAVIS: true
 addons:
-  postgresql: '10.10'
+  postgresql: '9.3'
 before_script:
 - psql -c 'create database ts_api_test;' -U postgres
 - npm i -g sequelize-cli gulp-cli
