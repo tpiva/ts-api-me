@@ -17,8 +17,8 @@ before_script:
 - npm install -g mysql2
 - npm i -g sequelize-cli gulp-cli
 - cd server/
-- sequelize init
-- sequelize db:migrate --env test
+- node_modules/.bin/sequelize init
+- node_modules/.bin/sequelize db:migrate --env test
 - npm install
 - gulp
 script:
