@@ -30,6 +30,7 @@ export default (sequelize, DataTypes) => {
         }
     }, {
         freezeTableName: true,
+        operatorsAliases: false,
     });
 
     User.beforeCreate((user) => {
