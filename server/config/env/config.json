@@ -4,6 +4,7 @@
         "password": "postgres",
         "database": "ts_api_test",
         "host": "localhost",
-        "dialect": "postgres"
+        "dialect": "postgres",
+        "operatorsAliases": false
     }
 }
