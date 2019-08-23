@@ -1,6 +1,6 @@
 module.exports = {
     env: 'development',
-    db: 'ts-api-test',
+    db: 'ts_api_test',
     dialect: 'postgres',
     username: 'postgres',
     password: 'postgres',
