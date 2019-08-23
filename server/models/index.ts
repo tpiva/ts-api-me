@@ -10,9 +10,9 @@ const db = <any>{};
 
 let sequelize;
 if (config.dbURL) {
-  sequelize = new Sequelize(config.dbURL);
+  sequelize = new Sequelize(config.dbURL, { operatorsAliases: false });
 } else {
-  sequelize = new Sequelize(config.db, config.username, config.password, config);
+  sequelize = new Sequelize(config.db, config.username, config.password, config, { operatorsAliases: false });
 }
 
 fs
