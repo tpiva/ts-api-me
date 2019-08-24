@@ -32,7 +32,7 @@ gulp.task('copy-migration-config-dir', () => {
 });
 
 gulp.task('build', gulp.series(
-    ['clean', 'compile', 'copy-opts', 'copy-migration-config-file', 'copy-migration-config-dir'])
+    ['compile', 'clean', 'compile', 'copy-opts', 'copy-migration-config-file', 'copy-migration-config-dir'])
 );
 
 gulp.task('default', gulp.series(['build']));
