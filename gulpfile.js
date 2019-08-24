@@ -21,14 +21,18 @@ gulp.task('copy-opts', () => {
         .pipe(gulp.dest('dist/tests/integration/config'));
 });
 
-gulp.task('copy-migration-config', gulp.series(['clean', 'compile', 'copy-opts']), () => {
+gulp.task('copy-migration-config-file', () => {
     return gulp.src('./server/config/config.json')
         .pipe(gulp.dest('./dist/server/config/'));
 });
 
-gulp.task('build', gulp.series(['copy-migration-config']), () => {
-    return gulp.src('server/migrations/')
+gulp.task('copy-migration-config-dir', () => {
+    return gulp.src('server/migrations/*')
         .pipe(gulp.dest('dist/server/migrations/'));
 });
+
+gulp.task('build', gulp.series(
+    ['clean', 'compile', 'copy-opts', 'copy-migration-config-file', 'copy-migration-config-dir'])
+);
 
 gulp.task('default', gulp.series(['build']));
