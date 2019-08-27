@@ -1,4 +1,5 @@
 import { ModuleEndpointMap } from "./base-router-module";
+import { ModulesRouterRapper, FeatureModuleRouter } from '../../modules/modules-router-map';
 
 export class RouterModuleFactory {
     
