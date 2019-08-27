@@ -1,3 +1,5 @@
+import { AuthRouterModule } from "./auth/auth-router";
+
 export interface FeatureModuleRouter {
     moduleName: any;
     parser: string;
@@ -6,8 +8,8 @@ export interface FeatureModuleRouter {
 export class ModulesRouterRapper {
     public registeredModules: Array<FeatureModuleRouter> = [
         {
-            moduleName: 'NomeDaClasse', 
-            parser: 'parser'
+            moduleName: AuthRouterModule, 
+            parser: 'getRoutesFromModules'
         }
     ];
 }
