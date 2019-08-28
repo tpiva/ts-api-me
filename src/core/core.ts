@@ -2,7 +2,7 @@ import * as express from 'express';
 import { Application, Request, Response, NextFunction } from 'express';
 import * as morgan from 'morgan';
 import * as bodyParser from 'body-parser';
-import { RouterModule } from './routes/routes';
+import { RouterModule } from './router/routes';
 import ResponseHandlers from './handlers/response-handlers';
 import AuthService from '../modules/auth/auth-service';
 
