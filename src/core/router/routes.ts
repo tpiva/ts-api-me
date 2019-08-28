@@ -32,6 +32,7 @@ export class RouterModule {
     private mountRoutes(authenticate: Function, registeredVerb: string, routerInfo: FeatureModuleRouterInfo) {
         if (routerInfo) {
             const { isProtected, callback, endpoint } = routerInfo;
+            console.log(isProtected, callback, endpoint);
             isProtected
                 ? this.express.route(endpoint).all(authenticate())[registeredVerb](callback)
                 : this.express.route(endpoint)[registeredVerb](callback);

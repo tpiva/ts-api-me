@@ -8,8 +8,8 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceFolder}/server/server.ts",
-            "preLaunchTask": "tsc: dist - tsconfig.json",
+            "program": "${workspaceFolder}/src/bootstrap.ts",
+            "preLaunchTask": "tsc: build - tsconfig.json",
             "outFiles": [
                 "${workspaceFolder}/dist/**/*.js"
             ]

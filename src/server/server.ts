@@ -7,11 +7,13 @@ export class Server {
     private express;
 
     constructor(databaseConnector) {
-        if (databaseConnector) {
-            this.db = databaseConnector;
-            this.express = new CoreModule().getExpress();
-            this.syncDatabase();
-        }
+        this.express = new CoreModule().getExpress();
+        this.upServer();
+        // if (databaseConnector) {
+        //     this.db = databaseConnector;
+        //     this.express = new CoreModule().getExpress();
+        //     this.syncDatabase();
+        // }
     }
 
     private async syncDatabase() {
