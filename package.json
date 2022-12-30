@@ -50,7 +50,7 @@
     "gulp-clean": "^0.4.0",
     "gulp-typescript": "^5.0.1",
     "istanbul": "^0.4.5",
-    "mocha": "^6.2.0",
+    "mocha": "^10.2.0",
     "nyc": "^14.1.1",
     "sequelize": "^5.16.0",
     "supertest": "^4.0.2",
